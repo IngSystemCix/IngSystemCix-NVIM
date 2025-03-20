@@ -4,6 +4,7 @@
     "LazyVim",
     "Snacks",
     "build_cmd",
-    "pick"
+    "pick",
+    "symbols_filter"
   ]
 }

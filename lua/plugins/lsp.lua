@@ -84,7 +84,7 @@ return {
           },
         },
         -- options for vim.lsp.buf.format
-        -- `bufnr` and `filter` is handled by the LazyVim formatter,
+        -- bufnr and filter is handled by the LazyVim formatter,
         -- but can be also overridden when specified
         format = {
           formatting_options = nil,

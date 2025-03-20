@@ -2,7 +2,11 @@ return {
   {
     "ahmedkhalf/project.nvim",
     opts = {
-      manual_mode = true,
+      manual_mode = false,
+      detection_methods = { "lsp", "pattern" },
+      patterns = { ".git", "package.json", "Makefile", "CMakeLists.txt", "pom.xml", "build.gradle", ".idea", ".vscode" },
+      
+      datapath = vim.fn.stdpath("data"),
     },
     event = "VeryLazy",
     config = function(_, opts)

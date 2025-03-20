@@ -155,6 +155,12 @@ return {
           clangd = function(_, opts)
             opts.capabilities.offsetEncoding = { "utf-16" }
           end,
+          angularls = function()
+            LazyVim.lsp.on_attach(function(client)
+              --HACK: disable angular renaming capability due to duplicate rename popping up
+              client.server_capabilities.renameProvider = false
+            end, "angularls")
+          end,
         },
       }
       local keys = require("lazyvim.plugins.lsp.keymaps").get()

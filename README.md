@@ -1,7 +1,7 @@
 # IngSystemCix-Nvim
 
-> [!ATTENTION]
-> Now it supports word wrap
+>[!NOTE]
+> Now it supports word wrap and you can also use the project browser.
 
 ![main](./assets/principal.png)
 

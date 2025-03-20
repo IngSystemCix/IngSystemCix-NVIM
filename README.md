@@ -1,5 +1,8 @@
 # IngSystemCix-Nvim
 
+> [!ATTENTION]
+> Now it supports word wrap
+
 ![main](./assets/principal.png)
 
 ## Installation

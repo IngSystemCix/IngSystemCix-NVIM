@@ -7,23 +7,38 @@ return {
     opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
+        -- Formatters
         "stylua",
         "shfmt",
+        "prettier",
+        "black",
+        -- Linters
+        "eslint_d",
+        "pylint",
+        "markdownlint-cli2",
+        "htmlhint",
+        -- LSPs
+        "angular-language-server",
+        "typescript-language-server",
+        "lua-language-server",
+        "emmet-language-server",
+        "python-lsp-server",
+        "biome",
       },
     },
     config = function(_, opts)
       require("mason").setup(opts)
       local mr = require("mason-registry")
+
       mr:on("package:install:success", function()
         vim.defer_fn(function()
-          -- trigger FileType event to possibly load this newly installed LSP server
           require("lazy.core.handler.event").trigger({
             event = "FileType",
             buf = vim.api.nvim_get_current_buf(),
           })
         end, 100)
       end)
-  
+
       mr.refresh(function()
         for _, tool in ipairs(opts.ensure_installed) do
           local p = mr.get_package(tool)
@@ -33,5 +48,50 @@ return {
         end
       end)
     end,
-  }
+  },
+
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    dependencies = { "mason.nvim" },
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local null_ls = require("null-ls")
+
+      null_ls.setup({
+        sources = {
+          -- Linters
+          null_ls.builtins.diagnostics.eslint_d,
+          null_ls.builtins.diagnostics.pylint,
+          null_ls.builtins.diagnostics.markdownlint,
+          null_ls.builtins.diagnostics.htmlhint,
+
+          -- Formatters
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.shfmt,
+          null_ls.builtins.formatting.black,
+        },
+      })
+    end,
+  },
+
+  {
+    "jay-babu/mason-null-ls.nvim",
+    dependencies = { "mason.nvim", "null-ls.nvim" },
+    config = function()
+      require("mason-null-ls").setup({
+        ensure_installed = {
+          "eslint_d",
+          "pylint",
+          "markdownlint-cli2",
+          "htmlhint",
+          "prettier",
+          "stylua",
+          "shfmt",
+          "black",
+        },
+        automatic_installation = true,
+      })
+    end,
+  },
 }

@@ -133,3 +133,14 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     notify("File saved: " .. vim.fn.expand("%:t"), "info", { title = "Saved" })
   end,
 })
+
+-- code actions for null-ls
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.name == "null-ls" then
+      client.server_capabilities.codeActionProvider = true
+    end
+  end,
+})

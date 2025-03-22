@@ -68,7 +68,7 @@ Before running, you need to install this C compiler:
 
 Additionally, we need to install the following dependencies on our system using Node.js:
 
-`npm install -g @biomejs/cli`
+`npm install -g @angular/language-server`
 
 `npm install -g @angular/cli`
 
@@ -78,3 +78,8 @@ Additionally, we need to install the following dependencies on our system using 
 
 > [!NOTE]
 > If the folder does not exist, create it.
+
+> [!NOTE]
+> If in the event that no Mason plugin is installed, you should use the following steps and manually install each one with this command:
+
+`:MasonInstall angular-language-server biome black emmet-language-server eslint_d gitui glint htmlhint lua-language-server markdown-toc markdownlint markdownlint-cli2 prettier pylint python-lsp-server shfmt stylua typescript-language-server`

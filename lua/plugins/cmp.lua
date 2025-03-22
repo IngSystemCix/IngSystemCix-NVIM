@@ -51,10 +51,17 @@ return {
           end,
         }),
         sources = cmp.config.sources({
-          { name = "copilot" },
+          { name = "nvim_lua" },
+          { name = "vsnip" },
+          { name = "emoji" },
+          { name = "luasnip" },
+          { name = "buffer" },
+          { name = "cmdline" },
           { name = "lazydev" },
           { name = "nvim_lsp" },
           { name = "path" },
+          { name = "cmp_tabnine" },
+          { name = "cmp_copilot" },
         }, {
           { name = "buffer" },
         }),

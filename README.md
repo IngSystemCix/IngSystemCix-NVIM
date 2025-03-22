@@ -64,6 +64,8 @@ Before running, you need to install this C compiler:
 
 `winget install Zig.Zig`
 
+`winget install sharkdp.fd`
+
 Additionally, we need to install the following dependencies on our system using Node.js:
 
 `npm install -g @biomejs/cli`
@@ -76,4 +78,3 @@ Additionally, we need to install the following dependencies on our system using 
 
 > [!NOTE]
 > If the folder does not exist, create it.
-

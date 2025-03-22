@@ -66,6 +66,11 @@ Before running, you need to install this C compiler:
 
 `winget install sharkdp.fd`
 
+> [!NOTE]
+> Don't forget to install Python for the linter. If you don't need it, you can modify the files and remove it.
+
+For more information, visit the [official website](https://www.python.org/).
+
 Additionally, we need to install the following dependencies on our system using Node.js:
 
 `npm install -g @angular/language-server`

@@ -58,6 +58,15 @@ require("lazy").setup({
     -- Utility plugins
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
 
+    {
+      "LazyVim/LazyVim",
+      opts = {
+        notifications = {
+          enabled = true,
+        },
+      },
+    },
+
     -- AI plugins
     { import = "lazyvim.plugins.extras.ai.copilot" },
     -- { import = "lazyvim.plugins.extras.ai.copilot-chat" },
@@ -76,7 +85,7 @@ require("lazy").setup({
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = {
     enabled = true, -- check for plugin updates periodically
-    notify = true, -- notify on update
+    notify = false, -- notify on update
   }, -- automatically check for plugin updates
   performance = {
     rtp = {

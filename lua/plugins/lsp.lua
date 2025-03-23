@@ -8,7 +8,7 @@ return {
       notify.setup({
         background_colour = "#191919",
         timeout = 3000,
-        stages = "slide",
+        stages = "fade_in_slide_out",
         icons = {
           ERROR = "",
           WARN = "",
@@ -92,11 +92,6 @@ return {
         -- LSP Server Settings
         servers = {
           lua_ls = {
-            -- mason = false, -- set to false if you don't want this server to be installed with mason
-            -- Use this to add any additional keymaps
-            -- for specific lsp servers
-            -- ---@type LazyKeysSpec[]
-            -- keys = {},
             settings = {
               Lua = {
                 workspace = {
@@ -139,6 +134,10 @@ return {
                   enable = true,
                 },
               },
+            },
+            keys = {
+              { "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", desc = "Organize Imports" },
+              { "<leader>cR", "<cmd>TypescriptRenameFile<CR>", desc = "Rename File" },
             },
           },
         },

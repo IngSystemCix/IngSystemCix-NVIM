@@ -1,7 +1,7 @@
 # IngSystemCix-Nvim
 
 > [!NOTE]
-> Now it supports word wrap and includes a project browser. Additionally, it has support for linters for Python, TypeScript, HTML, and more. Emmet has also been added.
+> Now it supports word wrap and includes a project browser. Additionally, it has support for linters for Python, TypeScript, HTML, and more. Emmet has also been added. It also supports React, HTTP requests, and GraphQL.
 
 ![main](./assets/principal.png)
 

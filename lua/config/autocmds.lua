@@ -144,3 +144,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyUpdate",
+  callback = function()
+    notify("Actualizando plugins...", "info", { title = "LazyVim" })
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyDone",
+  callback = function()
+    notify("Plugins actualizados correctamente.", "info", { title = "LazyVim" })
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyReload",
+  callback = function()
+    notify("Se detectaron cambios en la configuración. Recargando Neovim...", "warn", { title = "LazyVim" })
+  end,
+})

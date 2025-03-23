@@ -4,7 +4,7 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
-    event = { "InsertEnter", "LspAttach" },
+    event = { "BufReadPost", "InsertEnter", "LspAttach" },
     opts = {
       suggestion = {
         enabled = true,

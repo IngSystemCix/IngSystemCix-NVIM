@@ -19,11 +19,8 @@ return {
       function()
         require("which-key").show({ global = false }) -- Show the which-key popup for local keybindings
       end,
-    },
-    {
-      -- Define a group for Obsidian-related commands
-      "<leader>o",
-      group = "Obsidian",
+      desc = "Mostrar Which-Key popup (local bindings)",
     },
   },
+
 }

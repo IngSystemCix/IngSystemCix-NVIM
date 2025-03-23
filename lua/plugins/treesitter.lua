@@ -37,6 +37,8 @@ return {
       "vimdoc",
       "xml",
       "yaml",
+      "http",
+      "graphql"
     },
     incremental_selection = {
       enable = true,
@@ -67,6 +69,11 @@ return {
       callback = function()
         vim.treesitter.start(nil, "angular")
       end,
+    })
+
+    vim.list_extend(opts.ensure_installed, {
+      "tsx",
+      "typescript",
     })
   end,
 }

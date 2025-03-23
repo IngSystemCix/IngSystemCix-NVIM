@@ -5,6 +5,7 @@
     "Snacks",
     "build_cmd",
     "pick",
-    "symbols_filter"
+    "symbols_filter",
+    "get_args"
   ]
 }

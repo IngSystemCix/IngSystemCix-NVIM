@@ -25,6 +25,7 @@ return {
         "python-lsp-server",
         "biome",
       },
+      automatic_installation = true
     },
     config = function(_, opts)
       require("mason").setup(opts)

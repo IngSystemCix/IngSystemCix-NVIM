@@ -2,11 +2,20 @@ return {
   {
     "rcarriga/nvim-notify",
     config = function()
-      require("notify").setup({
-        -- Opciones de configuración
+      local notify = require("notify")
+      vim.notify = notify -- Sobrescribir notificaciones de LazyVim
+
+      notify.setup({
         background_colour = "#191919",
         timeout = 3000,
         stages = "slide",
+        icons = {
+          ERROR = "",
+          WARN = "",
+          INFO = "",
+          DEBUG = "",
+          TRACE = "✎",
+        },
       })
       vim.api.nvim_set_hl(0, "NotifyERRORBorder", { fg = "#FF0000" })  -- Rojo intenso para errores
       vim.api.nvim_set_hl(0, "NotifyWARNBorder", { fg = "#FFA500" })   -- Naranja para warnings
@@ -27,7 +36,6 @@ return {
       vim.api.nvim_set_hl(0, "NotifyTRACETitle", { fg = "#9400D3", bold = true })
 
       vim.api.nvim_set_hl(0, "NotifyINFOBody", { fg = "#FFFFFF" })  -- Blanco para el texto
-      vim.notify = require("notify")
     end,
   },
   {

@@ -1,7 +1,9 @@
 # IngSystemCix-Nvim
 
 > [!NOTE]
-> Now it supports word wrap and includes a project browser. Additionally, it has support for linters for Python, TypeScript, HTML, and more. Emmet has also been added. It also supports React, HTTP requests, and GraphQL.
+> Now it supports word wrap and includes a project browser. Additionally, it has
+> support for linters for Python, TypeScript, HTML, and more. Emmet has also
+> been added. It also supports React, HTTP requests, GraphQL, and Tailwind CSS.
 
 ![main](./assets/principal.png)
 
@@ -56,6 +58,11 @@ Next, clone the repository:
 Then, copy the contents of the cloned project and paste them into the following path:
 
 `C:\Users\${username}\AppData\Local\nvim`
+
+> [!NOTE]
+> After placing all the files in the nvim folder, you need to open PowerShell as an administrator and run the following command:
+
+`Remove-Item -Recurse -Force "$env:LOCALAPPDATA\nvim\.git", "$env:LOCALAPPDATA\nvim\assets"`
 
 Before running, you need to install this C compiler:
 

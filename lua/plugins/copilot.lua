@@ -3,6 +3,7 @@ return {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
+    build = ":Copilot auth",
     event = { "InsertEnter", "LspAttach" },
     opts = {
       suggestion = {
@@ -10,7 +11,7 @@ return {
         auto_trigger = true, -- Muestra sugerencias automáticamente
         debounce = 75,
         keymap = {
-          accept = "<C-J>", -- Aceptar sugerencia con Ctrl+J
+          accept = false,
           accept_word = false,
           accept_line = false,
           next = "<C-]>",

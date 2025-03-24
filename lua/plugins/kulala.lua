@@ -32,7 +32,7 @@ return {
       },
       ui = {
         display_mode = "split",
-        split_direction = "horizontal",
+        split_direction = "vertical",
         default_view = "body",
         winbar = true,
         default_winbar_panes = { "body", "headers", "headers_body", "verbose", "script_output", "report", "help" },

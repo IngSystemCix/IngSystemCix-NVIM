@@ -93,6 +93,9 @@ Additionally, we need to install the following dependencies on our system using 
 `npm install -g neovim`
 
 > [!NOTE]
+> Additionally, you must install `jq`. You can find more information [here](https://jqlang.org/).
+
+> [!NOTE]
 > If the folder does not exist, create it.
 
 > [!NOTE]

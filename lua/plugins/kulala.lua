@@ -17,6 +17,38 @@ return {
       { "<leader>RS", "<cmd>lua require('kulala').show_stats()<cr>", desc = "Show stats" },
       { "<leader>Rt", "<cmd>lua require('kulala').toggle_view()<cr>", desc = "Toggle headers/body" },
     },
-    opts = {},
+    opts = {
+      global_keymaps = false,
+      kulala_keymaps = true,
+      curl_path = "curl",
+      contenttypes = {
+        ["application/json"] = {
+          ft = "json",
+          formatter = vim.fn.executable("jq") == 1 and { "jq", "." },
+          pathresolver = function(...)
+            return require("kulala.parser.jsonpath").parse(...)
+          end,
+        },
+      },
+      ui = {
+        display_mode = "split",
+        split_direction = "horizontal",
+        default_view = "body",
+        winbar = true,
+        default_winbar_panes = { "body", "headers", "headers_body", "verbose", "script_output", "report", "help" },
+        show_variable_info_text = true,
+        show_icons = "on_request",
+        icons = {
+          inlay = {
+            loading = "⏳",
+            done = "✅",
+            error = "❌",
+          },
+          lualine = "🐼",
+          textHighlight = "WarningMsg", -- highlight group for request elapsed time
+        },
+        show_request_summary = true,
+      }
+    },
   }
 }

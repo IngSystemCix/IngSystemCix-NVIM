@@ -7,7 +7,6 @@ return {
         typescript = { "biome", "eslint" },
         javascriptreact = { "biome", "eslint" },
         typescriptreact = { "biome", "eslint" },
-        json = { "biome" },
       },
       formatters = {
         biome = {

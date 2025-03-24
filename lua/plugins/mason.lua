@@ -61,7 +61,7 @@ return {
       null_ls.setup({
         sources = {
           -- Linters
-          null_ls.builtins.diagnostics.eslint_d,
+          -- null_ls.builtins.diagnostics.eslint_d,
           null_ls.builtins.diagnostics.pylint,
           null_ls.builtins.diagnostics.markdownlint,
           null_ls.builtins.diagnostics.htmlhint,

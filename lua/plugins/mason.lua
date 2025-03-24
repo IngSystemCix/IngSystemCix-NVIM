@@ -22,6 +22,7 @@ return {
         "typescript-language-server",
         "lua-language-server",
         "emmet-language-server",
+        "graphql-language-service-cli",
         "python-lsp-server",
         "biome",
       },

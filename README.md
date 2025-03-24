@@ -88,6 +88,10 @@ Additionally, we need to install the following dependencies on our system using 
 
 `npm install -g htmlhint`
 
+`npm install -g @tailwindcss/language-server`
+
+`npm install -g neovim`
+
 > [!NOTE]
 > If the folder does not exist, create it.
 

@@ -73,6 +73,8 @@ Before running, you need to install this C compiler:
 
 `winget install sharkdp.fd`
 
+`winget install jqlang.jq`
+
 > [!NOTE]
 > Don't forget to install Python for the linter. If you don't need it, you can modify the files and remove it.
 
@@ -91,9 +93,6 @@ Additionally, we need to install the following dependencies on our system using 
 `npm install -g @tailwindcss/language-server`
 
 `npm install -g neovim`
-
-> [!NOTE]
-> Additionally, you must install `jq`. You can find more information [here](https://jqlang.org/).
 
 > [!NOTE]
 > If the folder does not exist, create it.

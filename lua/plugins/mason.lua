@@ -25,6 +25,12 @@ return {
         "graphql-language-service-cli",
         "python-lsp-server",
         "biome",
+        -- go
+        "goimports",
+        "gofumpt",
+        "gomodifytags",
+        "impl",
+        "delve"
       },
       automatic_installation = true
     },

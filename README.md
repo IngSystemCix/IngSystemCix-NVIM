@@ -94,6 +94,10 @@ Additionally, we need to install the following dependencies on our system using 
 
 `npm install -g neovim`
 
+`go install golang.org/x/tools/gopls@latest`
+
+`gopls version`
+
 > [!NOTE]
 > If the folder does not exist, create it.
 

@@ -17,11 +17,11 @@ return {
           TRACE = "✎",
         },
       })
-      vim.api.nvim_set_hl(0, "NotifyERRORBorder", { fg = "#FF0000" })  -- Rojo intenso para errores
-      vim.api.nvim_set_hl(0, "NotifyWARNBorder", { fg = "#FFA500" })   -- Naranja para warnings
-      vim.api.nvim_set_hl(0, "NotifyINFOBorder", { fg = "#00FF00" })   -- Verde para info
-      vim.api.nvim_set_hl(0, "NotifyDEBUGBorder", { fg = "#AAAAAA" })  -- Gris para debug
-      vim.api.nvim_set_hl(0, "NotifyTRACEBorder", { fg = "#9400D3" })  -- Violeta para trace
+      vim.api.nvim_set_hl(0, "NotifyERRORBorder", { fg = "#FF0000" }) -- Rojo intenso para errores
+      vim.api.nvim_set_hl(0, "NotifyWARNBorder", { fg = "#FFA500" })  -- Naranja para warnings
+      vim.api.nvim_set_hl(0, "NotifyINFOBorder", { fg = "#00FF00" })  -- Verde para info
+      vim.api.nvim_set_hl(0, "NotifyDEBUGBorder", { fg = "#AAAAAA" }) -- Gris para debug
+      vim.api.nvim_set_hl(0, "NotifyTRACEBorder", { fg = "#9400D3" }) -- Violeta para trace
 
       vim.api.nvim_set_hl(0, "NotifyERRORIcon", { fg = "#FF0000" })
       vim.api.nvim_set_hl(0, "NotifyWARNIcon", { fg = "#FFA500" })
@@ -35,7 +35,7 @@ return {
       vim.api.nvim_set_hl(0, "NotifyDEBUGTitle", { fg = "#AAAAAA", bold = true })
       vim.api.nvim_set_hl(0, "NotifyTRACETitle", { fg = "#9400D3", bold = true })
 
-      vim.api.nvim_set_hl(0, "NotifyINFOBody", { fg = "#FFFFFF" })  -- Blanco para el texto
+      vim.api.nvim_set_hl(0, "NotifyINFOBody", { fg = "#FFFFFF" }) -- Blanco para el texto
     end,
   },
   {
@@ -137,16 +137,68 @@ return {
             },
             keys = {
               { "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", desc = "Organize Imports" },
-              { "<leader>cR", "<cmd>TypescriptRenameFile<CR>", desc = "Rename File" },
+              { "<leader>cR", "<cmd>TypescriptRenameFile<CR>",      desc = "Rename File" },
             },
           },
           tailwindcss = {
             filetypes_exclude = { "markdown" },
             filetypes_include = {},
           },
+          gopls = {
+            gofumpt = true,
+            codelenses = {
+              gc_details = false,
+              generate = true,
+              regenerate_cgo = true,
+              run_govulncheck = true,
+              test = true,
+              tidy = true,
+              upgrade_dependency = true,
+              vendor = true,
+            },
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
+            analyses = {
+              nilness = true,
+              unusedparams = true,
+              unusedwrite = true,
+              useany = true,
+            },
+            usePlaceholders = true,
+            completeUnimported = true,
+            staticcheck = true,
+            directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+            semanticTokens = true,
+          },
         },
-        
+
         setup = {
+          gopls = function(_, opts)
+            -- workaround for gopls not supporting semanticTokensProvider
+            -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
+            LazyVim.lsp.on_attach(function(client, _)
+              if not client.server_capabilities.semanticTokensProvider then
+                local semantic = client.config.capabilities.textDocument.semanticTokens
+                client.server_capabilities.semanticTokensProvider = {
+                  full = true,
+                  legend = {
+                    tokenTypes = semantic.tokenTypes,
+                    tokenModifiers = semantic.tokenModifiers,
+                  },
+                  range = true,
+                }
+              end
+            end, "gopls")
+            -- end workaround
+          end,
+
           clangd = function(_, opts)
             opts.capabilities.offsetEncoding = { "utf-16" }
           end,
@@ -159,16 +211,16 @@ return {
           tailwindcss = function(_, opts)
             local tw = LazyVim.lsp.get_raw_config("tailwindcss")
             opts.filetypes = opts.filetypes or {}
-      
+
             -- Add default filetypes
             vim.list_extend(opts.filetypes, tw.default_config.filetypes)
-      
+
             -- Remove excluded filetypes
             --- @param ft string
             opts.filetypes = vim.tbl_filter(function(ft)
               return not vim.tbl_contains(opts.filetypes_exclude or {}, ft)
             end, opts.filetypes)
-      
+
             -- Additional settings for Phoenix projects
             opts.settings = {
               tailwindCSS = {
@@ -179,7 +231,7 @@ return {
                 },
               },
             }
-      
+
             -- Add additional filetypes
             vim.list_extend(opts.filetypes, opts.filetypes_include or {})
           end,
@@ -202,15 +254,15 @@ return {
     config = function(_, opts)
       -- setup autoformat
       LazyVim.format.register(LazyVim.lsp.formatter())
-  
+
       -- setup keymaps
       LazyVim.lsp.on_attach(function(client, buffer)
         require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
       end)
-  
+
       LazyVim.lsp.setup()
       LazyVim.lsp.on_dynamic_capability(require("lazyvim.plugins.lsp.keymaps").on_attach)
-  
+
       -- diagnostics signs
       if vim.fn.has("nvim-0.10.0") == 0 then
         if type(opts.diagnostics.signs) ~= "boolean" then
@@ -221,21 +273,21 @@ return {
           end
         end
       end
-  
+
       if vim.fn.has("nvim-0.10") == 1 then
         -- inlay hints
         if opts.inlay_hints.enabled then
           LazyVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
             if
-              vim.api.nvim_buf_is_valid(buffer)
-              and vim.bo[buffer].buftype == ""
-              and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
+                vim.api.nvim_buf_is_valid(buffer)
+                and vim.bo[buffer].buftype == ""
+                and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
             then
               vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
             end
           end)
         end
-  
+
         -- code lens
         if opts.codelens.enabled and vim.lsp.codelens then
           LazyVim.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
@@ -247,21 +299,21 @@ return {
           end)
         end
       end
-  
+
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-          or function(diagnostic)
-            local icons = LazyVim.config.icons.diagnostics
-            for d, icon in pairs(icons) do
-              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                return icon
+            or function(diagnostic)
+              local icons = LazyVim.config.icons.diagnostics
+              for d, icon in pairs(icons) do
+                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                  return icon
+                end
               end
             end
-          end
       end
-  
+
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
-  
+
       local servers = opts.servers
       local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local has_blink, blink = pcall(require, "blink.cmp")
@@ -273,7 +325,7 @@ return {
         has_blink and blink.get_lsp_capabilities() or {},
         opts.capabilities or {}
       )
-  
+
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities),
@@ -281,7 +333,7 @@ return {
         if server_opts.enabled == false then
           return
         end
-  
+
         if opts.setup[server] then
           if opts.setup[server](server, server_opts) then
             return
@@ -293,14 +345,14 @@ return {
         end
         require("lspconfig")[server].setup(server_opts)
       end
-  
+
       -- get all the servers that are available through mason-lspconfig
       local have_mason, mlsp = pcall(require, "mason-lspconfig")
       local all_mslp_servers = {}
       if have_mason then
         -- all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
       end
-  
+
       local ensure_installed = {} ---@type string[]
       for server, server_opts in pairs(servers) do
         if server_opts then
@@ -315,7 +367,7 @@ return {
           end
         end
       end
-  
+
       if have_mason then
         mlsp.setup({
           ensure_installed = vim.tbl_deep_extend(
@@ -326,7 +378,7 @@ return {
           handlers = { setup },
         })
       end
-  
+
       if LazyVim.lsp.is_enabled("denols") and LazyVim.lsp.is_enabled("vtsls") then
         local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
         LazyVim.lsp.disable("vtsls", is_deno)
@@ -338,5 +390,9 @@ return {
         end)
       end
     end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "go", "gomod", "gowork", "gosum" } },
   }
 }

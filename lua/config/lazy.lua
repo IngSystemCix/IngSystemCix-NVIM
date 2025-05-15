@@ -61,6 +61,7 @@ require("lazy").setup({
     -- AI plugins
     { import = "lazyvim.plugins.extras.ai.copilot" },
     { import = "lazyvim.plugins.extras.ai.copilot-chat" },
+	{ "lewis6991/gitsigns.nvim", enabled = false },
     -- import/override with your plugins
     { import = "plugins" },
   },

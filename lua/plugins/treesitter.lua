@@ -60,17 +60,24 @@ return {
     },
   },
   config = function(_, opts)
+    -- Asegurarse de que Angular esté incluido correctamente
     if type(opts.ensure_installed) == "table" then
       vim.list_extend(opts.ensure_installed, { "angular", "scss" })
     end
 
+    -- Crear autocmds para manejar archivos Angular correctamente
     vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
       pattern = { "*.component.html", "*.container.html" },
       callback = function()
+        -- Verifica si ya está cargado el parser de Angular
+        if not vim.treesitter.language_exists("angular") then
+          vim.treesitter.install("angular")
+        end
         vim.treesitter.start(nil, "angular")
       end,
     })
 
+    -- Se asegura de que otros lenguajes como TypeScript y JSX también estén instalados
     vim.list_extend(opts.ensure_installed, {
       "tsx",
       "typescript",

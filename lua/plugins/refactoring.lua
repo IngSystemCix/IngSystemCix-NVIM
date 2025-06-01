@@ -10,7 +10,9 @@ return {
       { "<leader>r", "", desc = "+refactor", mode = { "n", "v" } },
       {
         "<leader>rs",
-        pick,
+        function()
+          require("refactoring").select_refactor()
+        end,
         mode = "v",
         desc = "Refactor",
       },
@@ -27,35 +29,16 @@ return {
         function()
           require("refactoring").refactor("Extract Block")
         end,
+        mode = { "n", "v" },
         desc = "Extract Block",
       },
       {
-        "<leader>rf",
+        "<leader>rB",
         function()
           require("refactoring").refactor("Extract Block To File")
         end,
+        mode = { "n", "v" },
         desc = "Extract Block To File",
-      },
-      {
-        "<leader>rP",
-        function()
-          require("refactoring").debug.printf({ below = false })
-        end,
-        desc = "Debug Print",
-      },
-      {
-        "<leader>rp",
-        function()
-          require("refactoring").debug.print_var({ normal = true })
-        end,
-        desc = "Debug Print Variable",
-      },
-      {
-        "<leader>rc",
-        function()
-          require("refactoring").debug.cleanup({})
-        end,
-        desc = "Debug Cleanup",
       },
       {
         "<leader>rf",
@@ -82,12 +65,28 @@ return {
         desc = "Extract Variable",
       },
       {
+        "<leader>rP",
+        function()
+          require("refactoring").debug.printf({ below = false })
+        end,
+        mode = { "n", "v" },
+        desc = "Debug Print",
+      },
+      {
         "<leader>rp",
         function()
-          require("refactoring").debug.print_var()
+          require("refactoring").debug.print_var({ normal = true })
         end,
-        mode = "v",
+        mode = { "n", "v" },
         desc = "Debug Print Variable",
+      },
+      {
+        "<leader>rc",
+        function()
+          require("refactoring").debug.cleanup({})
+        end,
+        mode = { "n", "v" },
+        desc = "Debug Cleanup",
       },
     },
     opts = {
@@ -111,8 +110,7 @@ return {
       },
       printf_statements = {},
       print_var_statements = {},
-      show_success_message = true, -- shows a message with information about the refactor on success
-      -- i.e. [Refactor] Inlined 3 variable occurrences
+      show_success_message = true,
     },
     config = function(_, opts)
       require("refactoring").setup(opts)
@@ -122,5 +120,5 @@ return {
         end)
       end
     end,
-  }
+  },
 }

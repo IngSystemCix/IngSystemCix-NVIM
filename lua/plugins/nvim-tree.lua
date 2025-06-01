@@ -49,6 +49,7 @@ return {
 		timeout = 500,       -- Tiempo para refrescar estado git (ms)
 	  },
 	  renderer = {
+		highlight_git = true,
 		icons = {
 		  show = {
 			file = true,
@@ -59,6 +60,15 @@ return {
 		},
 	  },
     })
+	
+	vim.api.nvim_set_hl(0, "NvimTreeGitNew",     { fg = "#00ff00", bold = true })      -- Verde brillante, nuevo archivo
+	vim.api.nvim_set_hl(0, "NvimTreeGitDeleted", { fg = "#ff0000", bold = true })      -- Rojo brillante, archivo eliminado
+	vim.api.nvim_set_hl(0, "NvimTreeGitRenamed", { fg = "#ffa500", italic = true })    -- Naranja, archivo renombrado
+	vim.api.nvim_set_hl(0, "NvimTreeGitIgnored", { fg = "#808080", italic = true })    -- Gris, archivo ignorado
+	vim.api.nvim_set_hl(0, "NvimTreeGitStaged",  { fg = "#0000ff", bold = true })      -- Azul, archivo stageado (preparado)
+	vim.api.nvim_set_hl(0, "NvimTreeGitConflict",{ fg = "#ff00ff", bold = true })      -- Magenta, conflicto git
+	vim.api.nvim_set_hl(0, "NvimTreeGitDirty",   { fg = "#ffff00", bold = true })      -- Amarillo, archivo modificado (dirty)
+
 
     -- Abre el árbol automáticamente al iniciar Neovim sin argumentos
     vim.api.nvim_create_autocmd({ "VimEnter" }, {

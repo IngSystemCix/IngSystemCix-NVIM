@@ -1,26 +1,37 @@
-return {
-  -- Plugin: which-key.nvim
-  -- URL: https://github.com/folke/which-key.nvim
-  -- Description: A Neovim plugin that displays a popup with possible keybindings of the command you started typing.
-  "folke/which-key.nvim",
+local theme = require("utils.theme")
 
-  event = "VeryLazy", -- Load this plugin on the 'VeryLazy' event
+return {
+  "folke/which-key.nvim",
+  event = "VeryLazy",
 
   init = function()
-    -- Set the timeout for key sequences
     vim.o.timeout = true
-    vim.o.timeoutlen = 300 -- Set the timeout length to 300 milliseconds
+    vim.o.timeoutlen = 300
   end,
 
   keys = {
+    { "<leader>t", group = "themes" },
+    { "<leader>tc", function() theme.set_colorscheme("catppuccin-mocha") end, desc = "Catppuccin Mocha" },
+    { "<leader>tl", function() theme.set_colorscheme("catppuccin-latte") end, desc = "Catppuccin Latte" },
+    { "<leader>tn", function() theme.set_colorscheme("tokyonight-night") end, desc = "TokyoNight Night" },
+    { "<leader>ts", function() theme.set_colorscheme("tokyonight-storm") end, desc = "TokyoNight Storm" },
+    { "<leader>tm", function() theme.set_colorscheme("tokyonight-moon") end, desc = "TokyoNight Moon" },
+    { "<leader>td", function() theme.set_colorscheme("tokyonight-day") end, desc = "TokyoNight Day" },
     {
-      -- Keybinding to show which-key popup
       "<leader>?",
       function()
-        require("which-key").show({ global = false }) -- Show the which-key popup for local keybindings
+        require("which-key").show({ global = false })
       end,
       desc = "Mostrar Which-Key popup (local bindings)",
     },
   },
 
+  config = function()
+    local ok, wk = pcall(require, "which-key")
+    if not ok then
+      vim.notify("which-key no está disponible", vim.log.levels.WARN)
+      return
+    end
+    wk.setup {}
+  end,
 }

@@ -28,8 +28,8 @@ return {
       vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
       vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
       vim.keymap.set("n", "<A-H>", api.tree.toggle_hidden_filter, opts("Toggle Hidden"))
-	  vim.keymap.set("n", "gr", api.tree.reload, opts("Refresh"))
-	  vim.keymap.set("n", "<C-n>", require("nvim-tree.api").tree.toggle, { desc = "Toggle nvim-tree" })
+      vim.keymap.set("n", "gr", api.tree.reload, opts("Refresh"))
+      vim.keymap.set("n", "<C-n>", api.tree.toggle, { desc = "Toggle nvim-tree" })
     end
 
     require("nvim-tree").setup({
@@ -41,38 +41,52 @@ return {
       },
       filters = {
         dotfiles = false,
-		git_ignored = false,
+        git_ignored = false,
         custom = {},
       },
-	  git = {
-		enable = true,       -- Activar integración git para iconos y estados
-		ignore = false,      -- No ignorar archivos que están en .gitignore
-		timeout = 500,       -- Tiempo para refrescar estado git (ms)
-	  },
-	  renderer = {
-		highlight_git = true,
-		icons = {
-		  show = {
-			file = true,
-			folder = true,
-			folder_arrow = true,
-			git = true,
-		  },
-		},
-	  },
+      git = {
+        enable = true,
+        ignore = false,
+        timeout = 500,
+      },
+      renderer = {
+        highlight_git = true,
+        icons = {
+          show = {
+            file = true,
+            folder = true,
+            folder_arrow = true,
+            git = true,
+          },
+        },
+      },
     })
-	
-	vim.api.nvim_set_hl(0, "NvimTreeGitNew",     { fg = "#00ff00", bold = true })      -- Verde brillante, nuevo archivo
-	vim.api.nvim_set_hl(0, "NvimTreeGitDeleted", { fg = "#ff0000", bold = true })      -- Rojo brillante, archivo eliminado
-	vim.api.nvim_set_hl(0, "NvimTreeGitRenamed", { fg = "#ffa500", italic = true })    -- Naranja, archivo renombrado
-	vim.api.nvim_set_hl(0, "NvimTreeGitIgnored", { fg = "#808080", italic = true })    -- Gris, archivo ignorado
-	vim.api.nvim_set_hl(0, "NvimTreeGitStaged",  { fg = "#0000ff", bold = true })      -- Azul, archivo stageado (preparado)
-	vim.api.nvim_set_hl(0, "NvimTreeGitConflict",{ fg = "#ff00ff", bold = true })      -- Magenta, conflicto git
-	vim.api.nvim_set_hl(0, "NvimTreeGitDirty",   { fg = "#ffff00", bold = true })      -- Amarillo, archivo modificado (dirty)
+
+    local function set_nvim_tree_git_highlights()
+	  vim.api.nvim_set_hl(0, "NvimTreeGitNew",     { fg = "#00ff00", bold = true })
+	  vim.api.nvim_set_hl(0, "NvimTreeGitDeleted", { fg = "#ff0000", bold = true })
+	  vim.api.nvim_set_hl(0, "NvimTreeGitRenamed", { fg = "#ffa500", italic = true })
+	  vim.api.nvim_set_hl(0, "NvimTreeGitIgnored", { fg = "#808080", italic = true })
+	  vim.api.nvim_set_hl(0, "NvimTreeGitStaged",  { fg = "#0000ff", bold = true })
+	  vim.api.nvim_set_hl(0, "NvimTreeGitConflict",{ fg = "#ff00ff", bold = true })
+	  vim.api.nvim_set_hl(0, "NvimTreeGitDirty",   { fg = "#ffff00", bold = true })
+	end
+
+	-- Aplica colores personalizados al iniciar
+	set_nvim_tree_git_highlights()
+
+	-- Reaplica colores cada vez que cambias de colorscheme
+	vim.api.nvim_create_autocmd("ColorScheme", {
+	  callback = function()
+		vim.defer_fn(function()
+		  set_nvim_tree_git_highlights()
+		end, 50) -- 50 ms de espera antes de aplicar tus colores
+	  end,
+	})
 
 
-    -- Abre el árbol automáticamente al iniciar Neovim sin argumentos
-    vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    -- Abrir automáticamente el árbol al iniciar sin argumentos
+    vim.api.nvim_create_autocmd("VimEnter", {
       callback = function()
         if vim.fn.argc() == 0 then
           require("nvim-tree.api").tree.open()

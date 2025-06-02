@@ -5,6 +5,7 @@ return {
     name = "catppuccin",
     opts = {
       integrations = {
+		neotree = true,
         aerial = true,
         alpha = true,
         cmp = true,
@@ -54,5 +55,15 @@ return {
         end,
       },
     },
-  }
+  },
+  
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = "storm", -- o "night", "moon", "day"
+      transparent = false,
+    },
+  },
 }

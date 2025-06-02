@@ -1,5 +1,6 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
+require("custom.highlights").setup()
 vim.opt.spell = true
 vim.opt.spelllang = { "es", "en" }
 vim.cmd([[autocmd VimEnter * Screenkey]])

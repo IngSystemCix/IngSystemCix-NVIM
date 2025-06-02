@@ -165,3 +165,18 @@ vim.api.nvim_create_autocmd("User", {
     notify("Se detectaron cambios en la configuración. Recargando Neovim...", "warn", { title = "LazyVim" })
   end,
 })
+
+-- colors of nvim-tree
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    local api = vim.api
+    api.nvim_set_hl(0, "NvimTreeGitNew",     { fg = "#00ff00", bold = true })
+    api.nvim_set_hl(0, "NvimTreeGitDeleted", { fg = "#ff0000", bold = true })
+    api.nvim_set_hl(0, "NvimTreeGitRenamed", { fg = "#ffa500", italic = true })
+    api.nvim_set_hl(0, "NvimTreeGitIgnored", { fg = "#808080", italic = true })
+    api.nvim_set_hl(0, "NvimTreeGitStaged",  { fg = "#0000ff", bold = true })
+    api.nvim_set_hl(0, "NvimTreeGitConflict",{ fg = "#ff00ff", bold = true })
+    api.nvim_set_hl(0, "NvimTreeGitDirty",   { fg = "#ffff00", bold = true })
+  end,
+})

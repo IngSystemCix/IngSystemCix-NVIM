@@ -29,6 +29,7 @@ return {
       vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
       vim.keymap.set("n", "<A-H>", api.tree.toggle_hidden_filter, opts("Toggle Hidden"))
 	  vim.keymap.set("n", "gr", api.tree.reload, opts("Refresh"))
+	  vim.keymap.set("n", "<C-n>", require("nvim-tree.api").tree.toggle, { desc = "Toggle nvim-tree" })
     end
 
     require("nvim-tree").setup({

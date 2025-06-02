@@ -82,7 +82,22 @@ For more information, visit the [official website](https://www.python.org/).
 
 Additionally, we need to install the following dependencies on our system using Node.js:
 
-`npm install -g @angular/language-server`
+
+```bash
+npm install -g @angular/language-server
+````
+
+Then, verify that the `ngserver` command is available:
+
+```powershell
+Get-Command ngserver
+```
+
+Next, open the file `C:\Users\your_user\AppData\Local\nvim\lua\plugins\lsp.lua` and on line 126 replace the path with your correct one. For example:
+
+```lua
+cmd = { "pwsh", "-File", "C:/nvm4w/nodejs/ngserver.ps1", "--stdio", "--tsProbeLocations", "" }
+```
 
 `npm install -g @angular/cli`
 

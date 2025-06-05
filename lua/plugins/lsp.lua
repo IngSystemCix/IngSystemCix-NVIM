@@ -117,11 +117,6 @@ return {
               },
             },
           },
-          --angularls = {
-            --cmd = { "ngserver", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" },
-            --filetypes = { "typescript", "html", "typescriptreact", "angular" },
-            --root_dir = require("lspconfig.util").root_pattern("angular.json", "project.json"),
-          --},
 		  angularls = {
 			cmd = { "pwsh", "-File", "C:/nvm4w/nodejs/ngserver.ps1", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" },
 			filetypes = { "typescript", "html", "typescriptreact", "angular" },

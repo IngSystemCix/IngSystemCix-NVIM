@@ -105,6 +105,14 @@ cmd = { "pwsh", "-File", "C:/nvm4w/nodejs/ngserver.ps1", "--stdio", "--tsProbeLo
 
 `npm install -g htmlhint`
 
+Next, open the file `C:\Users\your_user\AppData\Local\nvim\lua\plugins\mason.lua` and on line 75 replace the path with your correct one. For example:
+
+```powershell
+Get-Command htmlhint
+```
+
+`args = { "-File", "C:\\nvm4w\\nodejs\\htmlhint.ps1", "$FILENAME" },`
+
 `npm install -g @tailwindcss/language-server`
 
 `npm install -g neovim`

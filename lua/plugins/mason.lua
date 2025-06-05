@@ -16,7 +16,6 @@ return {
         "eslint_d",
         "pylint",
         "markdownlint-cli2",
-        "htmlhint",
         -- LSPs
         "angular-language-server",
         "typescript-language-server",
@@ -32,7 +31,7 @@ return {
         "impl",
         "delve"
       },
-      automatic_installation = true
+      automatic_installation = true,
     },
     config = function(_, opts)
       require("mason").setup(opts)
@@ -67,17 +66,13 @@ return {
 
       null_ls.setup({
         sources = {
-          -- Linters
-          -- null_ls.builtins.diagnostics.eslint_d,
           null_ls.builtins.diagnostics.pylint,
           null_ls.builtins.diagnostics.markdownlint,
-          null_ls.builtins.diagnostics.htmlhint,
-
-          -- Formatters
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.shfmt,
           null_ls.builtins.formatting.black,
+          -- htmlhint custom removido
         },
       })
     end,
@@ -92,7 +87,7 @@ return {
           "eslint_d",
           "pylint",
           "markdownlint-cli2",
-          "htmlhint",
+          -- "htmlhint" removido
           "prettier",
           "stylua",
           "shfmt",

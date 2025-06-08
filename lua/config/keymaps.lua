@@ -241,3 +241,11 @@ if vim.fn.has("nvim-0.11") == 0 then
     return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
   end, { expr = true, desc = "Jump Previous" })
 end
+
+-- flutter
+
+vim.keymap.set("n", "<leader>fr", ":FlutterRun<CR>", { desc = "Run Flutter app" })
+vim.keymap.set("n", "<leader>fd", ":FlutterDevices<CR>", { desc = "Choose device" })
+vim.keymap.set("n", "<leader>fe", ":FlutterEmulators<CR>", { desc = "Choose emulator" })
+vim.keymap.set("n", "<leader>hr", ":FlutterHotReload<CR>", { desc = "Hot Reload" })
+vim.keymap.set("n", "<leader>rr", ":FlutterRestart<CR>", { desc = "Hot Restart" })

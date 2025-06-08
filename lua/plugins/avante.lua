@@ -4,11 +4,13 @@ return {
   lazy = false,
   version = false, -- set this if you want to always pull the latest change
   opts = {
+    providers = {
+      copilot = {
+        model = "claude-3.5-sonnet",
+      },
+    },
     ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
     provider = "copilot", -- Recommend using Claude
-    copilot = {
-      model = "claude-3.5-sonnet", -- o1-preview | o1-mini | claude-3.5-sonnet
-    },
     auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
     behaviour = {
       auto_suggestions = false, -- Experimental stage

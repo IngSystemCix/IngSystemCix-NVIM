@@ -29,7 +29,9 @@ return {
         "gofumpt",
         "gomodifytags",
         "impl",
-        "delve"
+        "delve",
+        -- tailwindcss
+        "tailwindcss-language-server",
       },
       automatic_installation = true,
     },
